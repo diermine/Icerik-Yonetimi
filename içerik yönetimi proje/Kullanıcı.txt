@@ -1,0 +1,11 @@
+Kullanıcı 
+
+Super-User
+
+admin
+123456789000
+
+Super-User
+
+yönetici
+123456789000

@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="4.0" client="site" method="upgrade">
+	<name>Popular news items - vertical layout</name>
+	<author>svtemplates.com</author>
+	<creationDate>September 2021</creationDate>
+	<copyright>Copyright (c) 2021 svtemplates.com All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail></authorEmail>
+	<authorUrl></authorUrl>
+	<version>1.0.0</version>
+	<description>
+	<![CDATA[
+	<div class="art-title" style="height: 50px; text-align: left;">
+	<p>
+    Popular news items - vertical layout. Module version 1.0.0.<br/>
+	For additional information visit <a href="https://svtemplates.com/" target="_blank">SVtemplates.com</a> or download <a href="https://svtemplates.com/index.php/joomla-extensions/549-free-joomla-module-content-news-that-allows-you-to-show-latest-articles" target="_blank">Pro version</a>.  Send your review for this module on <a href="https://extensions.joomla.org/extension/authoring-a-content/article-preview/popular-news-items-vertical-layout/" target="_blank">JED</a>.
+	</p>
+	</div>
+	]]>
+	</description>
+	<namespace path="src">Joomla\Module\ArticlesTop</namespace>
+	<files>
+		<filename module="mod_verticalpopularnews">mod_verticalpopularnews.php</filename>
+		<filename>index.html</filename>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+		<folder>fields</folder>
+		<folder>img</folder>
+	</files>
+
+<updateservers>
+    <server type="extension" name="Popular news items - vertical layout" priority="2">https://svtemplates.com/updatefolder/update_mod_verticalpopularnews_J4.xml</server>
+</updateservers>		
+
+	<config>
+		<fields name="params">
+		
+			<fieldset name="basic" addfieldpath="/modules/mod_verticalpopularnews/fields">
+
+<field type="line"  text="Global module params"/>
+				<field
+					name="catid"
+					type="category"
+					label="Category"
+					description="Selects Articles from one or more Categories. If no selection will show all categories as default."
+					extension="com_content"
+					multiple="true"
+					size="10"
+					default=""
+					>
+					<option value="">--- Select of Articles from a specific Category or a set of Categories ---</option>
+				</field>
+
+			<field name="count" type="list" default="3"  label="Count" description="The number of Articles to display">                   
+                   <option value="1">1</option>
+				   <option value="2">2</option>
+				   <option value="3">3</option>
+             </field>
+
+				<field
+					name="show_featured"
+					type="list"
+					label="Featured Articles"
+					description="Show or hide articles designated as featured."
+					default=""
+					>
+					<option value="">Show</option>
+					<option value="0">Hide</option>
+					<option value="1">Only show Featured Articles</option>
+				</field>
+				<field
+					name="exclude_current"
+					type="radio"
+					label="Exclude Current Article"
+					layout="joomla.form.field.radio.switcher"
+					default="1"
+					filter="integer"
+					>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field
+					name="ordering"
+					type="list"
+					label="Order Results"
+					default="a.publish_up"
+					validate="options"
+					>
+					<option value="a.publish_up">Published Date</option>
+					<option value="a.created">Created Date</option>
+					<option value="a.modified">Modified Date</option>
+					<option value="a.ordering">Ordering</option>
+					<option value="a.hits">Hits</option>
+					<option value="rand()">Random</option>
+				</field>
+
+				<field
+					name="direction"
+					type="list"
+					label="Direction"
+					default="1"
+					filter="integer"
+					showon="ordering:a.publish_up,a.created,a.modified,a.ordering,a.hits"
+					validate="options"
+					>
+					<option value="0">Ascending</option>
+					<option value="1">Descending</option>
+				</field>
+
+				<field
+					name="user_id"
+					type="list"
+					label="Authors"
+					description="Filter by author."
+					default="0"
+					>
+					<option value="0">Anyone</option>
+					<option value="by_me">Added or modified by me</option>
+					<option value="not_me">Not added or modified by me</option>
+				</field>
+						 
+            <field name="modverticalnewsmobilelayout" type="text" default="768px" size="50" label="Switch to mobile layout if the screen resolution is less than" description="Optional"/>
+			 
+			<field name="modulebackground" type="color" default="" label="Module background" description="Background color" />
+			<field name="itemspadding" type="text" default="5px 5px 5px 5px" label="Items padding" description="Padding top / right / bottom / left" />
+			<field name="itemsbackground" type="color" default="" label="Items background" description="Background color" />
+			<field name="itemsarticleboxshadow" type="text" default="0px 22px 20px -20px #000" label="Items box-shadow" description="Enter none to remove box-shadow" />
+			<field name="itemsbackgroundhover" type="color" default="" label="Hover items background" description="Hover background color" />
+			<field name="itemsarticlehoverboxshadow" type="text" default="0px 22px 20px -20px #000" label="Items hover box-shadow" description="Enter none to remove box-shadow" />
+			<field name="itemsbackgroundhovertransition" type="text" default="500" label="How many milliseconds the transition effect takes to complete" description="Enter 0 and the transition will have no effect" />
+			<field name="itemarticlesmargin" type="text" default="5px 0px 10px 0px" label="Items margin" description="Margin top / right / bottom / left" />
+
+			<field name="linkmoreaerticlestarget" type="list" default="_blank"  label="URL link target" description="">
+       			   <option value="_blank">Blank</option>
+                   <option value="_self">Self</option>
+			 </field>    
+
+<field type="line"  text="Module title params"/>
+			<field
+				name="newsmoduletitleonof"
+				type="radio"
+				label="Enable / Disable Module title"
+				layout="joomla.form.field.radio.switcher"
+				default="1"
+				filter="integer"
+				>
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="newsmoduletitleposition" type="list" default="1"  label="Title module position" description="">
+       			   <option value="1">Position 1</option>
+                   <option value="2">Position 2</option>
+			 </field>    
+			<field
+				name="linktitleurl"
+				type="radio"
+				label="Enable / Disable link"
+				layout="joomla.form.field.radio.switcher"
+				default="1"
+				filter="integer"
+				>
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			 <field name="ourteamtitle" type="text" default="" size="50" label="Text title" description="Add title"/>  
+			 <field name="modtitlelinkurl" type="text" default="#" size="50" label="Title link" description="Add URL"/>  
+			 
+               <field name="ourteamtitletextalign" type="list" default="center"  label="Title text-align" description="">
+       			   <option value="left">Left</option>
+                   <option value="right">Right</option>
+       			   <option value="center">Center</option>
+                   <option value="justify">Justify</option>
+              </field>    
+
+			 <field name="ourteamtitlecolor" type="color" default="" label="Title color" description="Title color" /> 
+			 <field name="ourteamtitlehovercolor" type="color" default="" label="Hover title color" description="Title color" /> 
+
+			<field name="ourteamtitletextdecoration" type="list" default="none"  label="Hover title text-decoration" description="Optional">                   
+                   <option value="none">No</option>
+				   <option value="underline">Underline</option>
+             </field>
+			 
+			 <field name="newsmoduletitlebackground" type="color" default="" label="Title background color" description="Title background" />  
+			 
+             <field name="ourteamtitlepadding" type="text" default="10px 5px 10px 5px" size="50" label="Title padding" description="Padding top / right / bottom / left"/> 
+			 
+             <field name="ourteamtitletextshadow" type="text" default="2.4px 2.4px 0px rgba(23, 23, 23, 0.81)" size="50" label="Title text-shadow" description="Enter ' none ' to remove text shadow"/> 
+             <field name="ourteamtitleletterspacing" type="text" default="0px" size="50" label="Title letter-spacing" description="CSS option"/> 
+			
+			<field name="ourteamtitlefontweight" type="list" default="normal"  label="Title font-weight" description="Optional">                   
+                   <option value="normal">Normal</option>
+                   <option value="bold">Bold</option>
+                   <option value="lighter">Lighter</option>
+           		   <option value="100">100</option> 
+				   <option value="200">200</option> 
+				   <option value="300">300</option> 
+				   <option value="400">400</option> 
+				   <option value="500">500</option> 
+				   <option value="600">600</option> 
+				   <option value="700">700</option> 
+				   <option value="800">800</option> 
+				   <option value="900">900</option>
+             </field>
+
+			 <field name="ourteamtitlefontsize" type="text" default="20px" size="50" label="Title font-size" description="CSS option"/>      
+
+			<field
+				name="googleFont"
+				type="radio"
+				label="Google font for title"
+				layout="joomla.form.field.radio.switcher"
+				default="1"
+				filter="integer"
+				>
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>				
+
+			<field name="ourteamtitlefontfamily" type="text" default="Open+Sans" label="Google Font Style" description="If you want to use this function you must leave the field CSS Font Style empty" showon="googleFont:1" />	
+			<field name="ourteamtitlefontfamilycss" type="text" default="" label="CSS Font Style" description="CSS font-family. If you want to use this function you must turn off Google font for title" showon="googleFont:0" />	
+			 
+<field type="line" text="Article title params" />
+			 
+			<field
+				name="googleFontarticletitle"
+				type="radio"
+				label="Google font for title"
+				layout="joomla.form.field.radio.switcher"
+				default="1"
+				filter="integer"
+				>
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>				
+
+			<field name="firstarticletitlefontfamily" type="text" default="Open+Sans" label="Google Font Style" description="If you want to use this function you must leave the field CSS Font Style empty" showon="googleFontarticletitle:1" />
+			<field name="firstarticletitlecssfontfamily" type="text" default="" label="CSS Font Style" description="CSS font-family. If you want to use this function you must turn off Google font for title" showon="googleFontarticletitle:0" />	
+			<field name="firstarticletitlefontsize" type="text" default="16px" label="Title font-size" description="" />
+			<field name="firstarticletitlelineheight" type="text" default="1" label="Title line-height" description="" />
+			<field name="firstarticletitletextalign" type="list" default="left"  label="Title text-align" description="Optional">                   
+                   <option value="left">Left</option>
+				   <option value="right">Right</option>
+				   <option value="center">Center</option>
+				   <option value="justify">Justify</option>
+             </field>
+			 
+			<field name="firstarticletitlemargin" type="text" default="5px 5px 5px 5px" label="Title margin" description="Margin top / right / bottom / left" />
+
+			<field name="firstarticletitlefontweight" type="list" default="normal"  label="Title font-weight" description="Optional">                   
+                   <option value="normal">Normal</option>
+				   <option value="bold">Bold</option>
+             </field>
+			 
+			<field name="firstarticletitletextdecoration" type="list" default="none"  label="Title text-decoration" description="Optional">                   
+                   <option value="none">No</option>
+				   <option value="underline">Underline</option>
+             </field>
+			<field name="firstarticletitlecolor" type="color" default="" label="Title color" description="" />
+			<field name="firstarticletitlehovercolor" type="color" default="" label="Title hover color" description="" />
+			<field name="hoveritemtitlecolor" type="color" default="" label="Hover item - title color" description="" />
+			<field name="hoverfirstarticletitletextdecoration" type="list" default="none"  label="Hover title text-decoration " description="Optional">                   
+                   <option value="none">No</option>
+				   <option value="underline">Underline</option>
+             </field>
+			<field name="limittexttitlearticle" type="text" default="50" label="Limit text title" description="" />
+
+<field type="line" text="Image params" />
+			<field name="patchtoimage" type="list" default="3"  label="Use image" description="">
+       			   <option value="1">Intro Image</option>
+       			   <option value="2">Full Article Image</option>
+                   <option value="3">Article image</option>
+			 </field>    
+			 
+				<field
+					name="image"
+					type="radio"
+					layout="joomla.form.field.radio.switcher"
+					label="Enable show article image"
+					description=""
+					default="0"
+					filter="integer"
+					showon="patchtoimage:3"
+					>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>			 
+			 
+			<field name="articlesimgheight" type="text" default="100px" label="Image height" description="" />	
+			<field name="newsboximagewidth" type="text" default="100px" label="Image width" description="" />
+            <field name="newsboximageobjectfit" type="list" default="cover"  label="Image object size" description="">
+       			   <option value="cover">Cover</option>
+       			   <option value="contain">Contain</option>
+       			   <option value="initial">Iinitial</option>
+       			   <option value="inherit">Inherit</option>
+       			   <option value="none">None</option>
+       			   <option value="revert">Revert</option>
+       			   <option value="scale-down">Scale-down</option>				   				   
+       			   <option value="fill">Fill</option>
+              </field>
+             <field name="newsboximageobjectposition" type="list" default="center center"  label="Image object position" description="">
+       			   <option value="center center">center center</option>
+       			   <option value="left top">left top</option>
+       			   <option value="left center">left center</option>
+       			   <option value="left bottom">left bottom</option>
+       			   <option value="right top">right top</option>
+       			   <option value="right center">right center</option>
+       			   <option value="right bottom">right bottom</option>
+       			   <option value="center top">center top</option>
+       			   <option value="center bottom">center bottom</option>				   
+              </field> 			
+			<field name="newsboximagepadding" type="text" default="5px 5px 5px 5px" label="Image padding" description="Padding top / right / bottom / left" />	
+			<field name="newsboximagefloat" type="list" default="left"  label="Image position" description="">                   
+                   <option value="left">Left</option>
+				   <option value="right">Right</option>
+				   <option value="none">Top</option>
+             </field>
+			
+			<field name="newsboximageborderradius" type="list" default="0px"  label="Round image" description="Optional. This option works correctly if the width and height of the image are the same">                   
+                   <option value="0px">No</option>
+				   <option value="150px">Yes</option>
+             </field>
+			
+			<field name="articlesimgheightmobile" type="text" default="" label="Image height for mobile layout" description="" />	
+			
+<field type="line" text="Author articles params" />
+			
+			<field name="firstarticleautoronof" type="radio" class="btn-group" default="1" label="Author article" description="">
+                	<option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                 </field> 
+
+			<field name="firstarticleautortext" type="text" default="Written by" label="Author text" description="" />
+			<field name="firstarticleautormargin" type="text" default="5px 5px 5px 5px" label="Author text margin" description="Margin top / right / bottom / left" />
+			<field name="firstarticleautorcolor" type="color" default="" label="Author color" description="" />
+			<field name="firstarticleautorfontweight" type="list" default="normal"  label="Author font-weight" description="Optional">                   
+                   <option value="normal">Normal</option>
+				   <option value="bold">Bold</option>
+             </field>
+
+			<field name="firstarticleautorfontsize" type="text" default="13px" label="Author font-size" description="" />
+			<field name="firstarticleautorlineheight" type="text" default="1.5" label="Author line-height" description="" />
+
+			<field name="firstarticleautortextalign" type="list" default="left"  label="Author text-align" description="Optional">                   
+                   <option value="left">Left</option>
+				   <option value="right">Right</option>
+				   <option value="center">Center</option>
+				   <option value="justify">Justify</option>
+             </field>
+			 
+<field type="line" text="Article hits / Article date params" />
+			
+			<field name="firstarticlehits" type="radio" class="btn-group" default="0" label="Article hits" description="">
+                	<option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                 </field> 
+				 
+			<field name="iconarticlehits" type="list" default="none"  label="Icon hits" description="">
+       			   <option value="">No</option>
+                   <option value="url">Yes</option>
+			 </field>    
+
+			<field name="firstarticledateupdate" type="radio" class="btn-group" default="0" label="Article date" description="">
+                	<option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                 </field> 
+				 
+			<field name="iconcontentdateupdate" type="list" default="none"  label="Icon date date" description="">
+       			   <option value="">No</option>
+                   <option value="url">Yes</option>
+			 </field>    
+				 
+			<field name="firstarticlehitsupdatemargin" type="text" default="5px 5px 5px 5px" label="Article hits / Article date margin" description="Margin top / right / bottom / left" />
+
+			<field name="artclehitsdateposition" type="list" default="1"  label="Article hits / Article date position" description="">
+       			   <option value="1">Position 1</option>
+                   <option value="2">Position 2</option>
+			 </field>    
+				 
+			<field name="firstarticlehitsupdatemargin" type="text" default="5px 5px 5px 5px" label="Article hits / Article date margin" description="Margin top / right / bottom / left" />
+				 
+			<field name="dateofarticle" type="list" default="modified"  label="Date of the article" description="Optional">                   
+                   <option value="modified">Modified Date</option>
+				   <option value="publish_up">Publishing Date</option>
+				   <option value="created">Created Date</option>
+             </field>
+				 
+			<field name="firstarticledateformatupdate" type="text" default="l jS \of F Y │ h:i:s A" label="Date format" description="" />
+			<field name="firstarticlehitsupdatetexalign" type="list" default="left"  label="Article hits / Article date  text-align" description="Optional">                   
+                   <option value="left">Left</option>
+				   <option value="right">Right</option>
+				   <option value="center">Center</option>
+				   <option value="justify">Justify</option>
+             </field>
+			<field name="firstarticlehitsupdatecolor" type="color" default="" label="Article hits / Article date color" description="" />
+			<field name="firstarticlehitsupdatefontsize" type="text" default="12px" label="Article hits / Article date font-size" description="" />
+			<field name="firstarticledatecreatelineheight" type="text" default="1.5" label="Article hits / Article date line-height" description="" />
+			
+			
+<field type="line" text="Tags Articles" />
+			<field name="tagsarticles" type="radio" class="btn-group" default="0" label="Tags articles" description="">
+                	<option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                 </field> 
+			<field name="limitcounttags" type="text" default="5" label="Tags count" description="" />
+			<field name="tagsatribute" type="text" default="" label="Text before tags" description="For example: Tags: " />
+			<field name="ariclestagsspancolor" type="color" default="" label="Text color" description="" />
+			<field name="ariclestagsmargin" type="text" default="5px 5px 5px 5px" label="Tags margin" description="Margin top / right / bottom / left" />
+			<field name="ariclestagsposition" type="list" default="left"  label="Tags position" description="Optional">                   
+                   <option value="left">Left</option>
+				   <option value="right">Right</option>
+				   <option value="center">Center</option>
+             </field>
+			<field name="ariclestagscolor" type="color" default="" label="Tags color" description="" />
+			<field name="ariclestagscolorhover" type="color" default="" label="Tags hover color" description="" />
+			<field name="tagslinktarget" type="list" default="_self"  label="Tags link target" description="">
+       			   <option value="_blank">Blank</option>
+                   <option value="_self">Self</option>
+			 </field>    
+			<field name="ariclestagsfontsize" type="text" default="12px" label="Tags font-size" description="" />
+			<field name="ariclestagslineheight" type="text" default="1.5" label="Tags line-height" description="" />
+			<field name="showtagsmobile" type="radio" class="btn-group" default="1" label="Tags articles in mobile layout" description="">
+                	<option value="1">JNO</option>
+                    <option value="0">JYES</option>
+                 </field> 
+				
+<field type="line"  text="More params"/>
+            <field name="modcss" type="textarea" default="" label="Field for additional CSS code" description="" class="inputbox span7" rows="4" cols="20" filter="raw"/>
+				
+			</fieldset>
+
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					class="form-select"
+					validate="moduleLayout"
+				/>
+
+				<field
+					name="moduleclass_sfx"
+					type="textarea"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					rows="3"
+					validate="CssIdentifier"
+				/>
+
+				<field
+					name="cache"
+					type="list"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					default="1"
+					filter="integer"
+					validate="options"
+					>
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field
+					name="cache_time"
+					type="number"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					default="900"
+					filter="integer"
+				/>
+
+				<field
+					name="cachemode"
+					type="hidden"
+					default="itemid"
+					>
+					<option value="itemid"></option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
